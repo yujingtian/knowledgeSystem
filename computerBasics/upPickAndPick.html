@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>装箱拆箱操作</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //隐式装箱
+    var a = 'name'
+    var b = a.indexOf('a')
+    //实际等于
+    var a = new String('name')
+    var b = a.indexOf(a)
+    a = null   //这个隐式引用对象会被立即销毁
+
+
+    //拆箱
+    var obj = {
+        valueOf : () => {console.log("valueOf"); return Function},
+        toString : () => {console.log("toString"); return Function}
+    }
+    String(obj)    //toString  valueOf
+    //Number(obj)    //valueOf   toString
+    //obj+ "123123"       //valueOf   toString
+</script>
+</html>
