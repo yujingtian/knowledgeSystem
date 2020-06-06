@@ -25,5 +25,76 @@
         拆箱过程内部调用ToPrimitive,该操作接受两个参数，第一个是要转变的对象，第二个是PreferredType（非必须） 是对象被期待转成什么类型的
         默认先valueOf 看看否有基本类型的返回值，然后再看toString方法，如果 toString 方法也没有返回值，产生 TypeError 错误。
         PreferredType 影响 valueOf 与 toString 的调用顺序
+6.理解值类型和引用类型
+    值类型：Number、Stirng、Boolean、Null、Underfined
+            栈（stack），占内存空间固定，使用后被销毁
+            值的拷贝,创建一个新对象，保存与复制的是值本身，两份数据在内存中是完全独立的
+            值是不可变的，函数作用域，在函数内部修改时生效，函数销毁时失效
+            比较方式：值的比较
+    引用类型：Object、Function、Array、Date、RegExp 
+            堆（heap），占内存空间不固定，使用后不一定被销毁，只有一个对象没有任何引用时，系统的垃圾回收机制才会回收销毁，
+            引用的拷贝，创建一个新引用，保存与复制的是指向对象的一个指针，变量中的存储的地址赋值一份单独存储,两个变量中修改其中一个对象，另外一个引用来访问的时候，也会访问到修改后的值。
+            使用 new() 方法构造出的对象是引用型，
+            值是可变的，函数中被修改时修改的是运行时数据区中的值，即使函数被销毁，变量的值依旧被改变
+            比较方式：引用的比较
+7.null和undefined的区别
+            历史原因：1.null像在Java里一样，被当成一个对象，设计者认为"无"的值最好不是对象
+                     2.JavaScript的最初版本没有包括错误处理机制，发生数据类型不匹配时，往往是自动转换类型或者默默地失败，如果null自动转为0，很不容易发现错误
+            null是一个表示"无"的对象，转为数值时为0,用法：
+            1.作为函数的参数，表示该函数的参数不是对象
+            2.作为对象原型链的终点
+            undefined是一个表示"无"的原始值，转为数值时为NaN，用法：
+            1.变量被声明了，但没有赋值时，就等于undefined
+            2.调用函数时，应该提供的参数没有提供，该参数等于undefined
+            3.对象没有赋值的属性，该属性的值为undefined
+            4.函数没有返回值时，默认返回undefined
+            例子
+            Number(null) //0
+            Number(undefined) //NaN
+8.至少可以说出三种判断JavaScript数据类型的方式，以及他们的优缺点，如何准确的判断数组类型
+            1.typeOf  可以对基本类型做出准确的判断  注意：typeof null 会返回Object （只能检测出基本类型）
+            2.instanceof 判断对象和构造函数在原型链是否有关系，有则真，否则假（不能检测出基本类型，且不能跨iframe）
+            3.Object.prototype.toString 可以说不管是什么类型，它都可以立即判断出（检测出所有的类型，IE6下，undefined和null均为Object）
+                例子：
+                   var str = 'hello';
+                   Object.prototype.toString.call(str);//[object String]
+            4.constructor：查看对象对应的构造函数 constructor 在其对应对象的原型下面，是自动生成的。（基本能检测所有的类型，除了null和undefined，constructor易被修改，也不能跨iframe）
+                例子：
+                var str = 'hello';
+                alert(str.constructor == String);//true
+                var str = null';
+                alert(str.constructor == null); //报错
+9.可能发生隐式类型转换的场景以及转换原则，应如何避免或巧妙应用
+            隐式转换场景
+                js中的双等于==
+                布尔值会转换为数字，false转换为0，true转换为1
+                当两个值都是对象时，比较的是两个引用值在内存中是否是同一个对象
+                例子：
+                [] == [] //false
+                [] == {} //false
+                {} == {} //false
+                [] == ![]
+                最后一个是因为右边空数组会转化为true，取反变为false，false变为0；左边空数组变为空字符串再变为0，0==0就为true
+            如何避免：
+                用全等符号===来判断是否相等，es6中可以用Object.is()来判断  Object.is(true,1) //false
+            巧用：
+                const str = 变量 + "  " //将变量转换成字符串
+                const number = true + 1  //转成了数值类型的数据
+10.出现小数精度丢失的原因，JavaScript可以存储的最大数字、最大安全数字，JavaScript处理大数字的方法、避免精度丢失的方法
+            js的Number类型遵循的是IEEE754标准，使用64位固定长度来表示
+            IEEE754标准由三个区域组成：
+                1.sign bit (符号位) 一位  
+                2.exponent bias (指数偏移值) 十一位
+                3.fraction (分数值) 五十二位
+            value = sign * exponent * fraction   如果某些小数的fraction有无限循环的现象，就像0.1
+            1001...(中间有 11 个 1001)...1010 (请注意最后四位，是 1010 而不是 1001，因为四舍五入有进位,准确的说是0舍1进，这个进位就是造成 0.1 + 0.2 不等于 0.3 的原因)
+
+            JavaScript可以存储的最大数字：2的53次方 之后精度会有问题
+            JavaScript可以存储的最大安全数字： 2的53次方
+            避免精度丢失的方法：
+            1.四则运算精度问题解决方案  将小数放到整数位做计算，再缩小倍数，或者转成字符串，进行手动移位
+            2.toFixed (0.1 + 0.2).toFixed(1) // "0.3"
+
+    
 
 
