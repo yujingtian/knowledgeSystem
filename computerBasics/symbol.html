@@ -9,4 +9,107 @@
 <body>
     
 </body>
+<script>
+    //任何两个独立的Symbol返回都是false
+    var a = Symbol()
+    var b = Symbol("哈哈哈")
+    var d = Symbol.for("boo")   // Symbol.for会先检查key值是否存在
+    console.log( a instanceof Symbol ) //false
+    console.log( b.toString() )
+    console.log( String(b) === "Symbol(哈哈哈)")
+    console.log(Symbol.keyFor(d))
+    //Symbol相当于私有变量
+    var c={
+        name : "123",
+        age:18,
+        [a]:"长得帅"
+    }
+    
+    for(var key in c){
+        console.log(key)   //只有name,age
+    }
+    console.log(Object.keys(c));//["name", "age"]
+    console.log(Object.getOwnPropertyNames(c));//["name", "age"]
+
+    //手动实现
+    //Symbol 函数前不能使用 new 命令
+    //如果 Symbol 的参数是一个对象，就会调用该对象的 toString 方法，将其转为字符串，然后才生成一个 Symbol 值
+    //Symbol 值不能与其他类型的值进行运算，会报错
+    (function(){
+        var root = this
+        var index = 0
+        var forMap = {}
+        //防止出现同名的属性名
+        function generateName(descString){
+            index++
+            return descString + '_' + index 
+        }
+        var SymbolPolyfill = function Symbol(descString){
+            if(this instanceof SymbolPolyfill){
+                console.error('Symbol is not a constructor')
+            }
+            var descString = descString === undefined ? undefined : String(descString)
+            //重写toString
+            var symbol = Object.create({
+                toString:function(){
+                    return 'Symbol('+ this.__Description__+')'
+                },
+                valueOf:function(){
+                    console.error('Cannot convert a Symbol value to everything');
+                    //但是Symbol显式调用valueOf(),会显示对象本身，所以只能实现一半
+                    //return this
+                }
+            })
+            Object.defineProperties(symbol, {
+                '__Description__':{
+                    value: generateName(descString),
+                    writable:false,
+                    enumerable:false,
+                    configurable:false
+                },
+            })
+            return symbol
+        }
+        //实现key keyfor方法
+        Object.defineProperties(SymbolPolyfill, {
+            'for': {
+                value: function (description) {
+                    var descString = description === undefined ? undefined : description
+                    //forMap就是你创建的所有Symbol 如果在对象中存在则直接返回创建过的对象 否则新创建一个
+                    return forMap[descString] ? forMap[descString] : forMap[descString] = SymbolPolyfill(descString);
+                },
+                writable: true,
+                enumerable: false,
+                configurable: true
+            },
+            'keyfor': {
+                value: function (symbol) {
+                    //遍历forMap方法 如果找到则返回key,否则undefined
+                    for (var key in forMap) {
+                        if (forMap[key] === symbol) {
+                            return key
+                        }
+                    }
+                },
+                writable: true,
+                enumerable: false,
+                configurable: true
+            }
+        })
+        var mySymbol = SymbolPolyfill(123)
+        var mySymbol2 = SymbolPolyfill(123)
+        console.log(String(mySymbol))
+        console.log(String(mySymbol2))
+
+        var o = {}
+        o[mySymbol] = "hello"
+        o[mySymbol2] = "hi"
+        console.log(o)
+
+        //console.log( mySymbol + 1)  //会报错
+
+        var for1 = SymbolPolyfill.for("123")
+        console.log(SymbolPolyfill.keyfor(for1)) //123  
+    })();
+</script>
 </html>

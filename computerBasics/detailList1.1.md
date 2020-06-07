@@ -1,3 +1,4 @@
+1.1 变量和类型
 1.javascript 规定了几种语言类型
     基本类型：undefind Null Boolean String Number Symbol BigInt
     引用类型：Object([], function, {}, Date ...)
@@ -5,6 +6,10 @@
     javacript基本数据类型都是直接按值存储在栈中的（undefind null 不是NEW出来的boolean number string）他们每一个的数据占用的空间都是确定的，由系统自动分配和释放，内存能够及时回收，更加容易管理内存空间
     javascript引用类型被存储于堆（如对象，数组，函数等， 通过拷贝或者new出来的）,其实是引用类型的数据的地址指针存储于栈中，想要访问引用类型的数据，先从栈中拿到地址指针，然后通过地址指针在堆找到所需要的数据
 3.手动实现一个简单的Symbol(symbol.html)
+    Symbol是由ES6规范引入的一项新特性，它的功能类似于一种标识唯一性的ID
+    每个Symbol实例都是唯一的。因此，当你比较两个Symbol实例的时候，将总会返回false
+    Symbol类型的key是不能通过Object.keys()或者for...in来枚举的
+    把不需要对外操作的属性用Symbol来定义
 4.JavaScript中的变量在内存中的具体存储形式
     栈内存：存储基本数据类型， 按值访问， 存储空间确定，由系统自动分配内存空间，空间小运行效率搞， 先进后出，后进先出
     堆内存：存储引用数据类型， 按引用访问， 存储大小不定，可动态调整， 由代码指定分配，空间大运行相对较低， 无序存储，可根据引用直接获取

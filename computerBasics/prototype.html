@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>原型和原型链</title>
+</head>
+<body>
+  
+</body>
+<script>
+  //函数本身也是一个对象
+  function Person(){}
+  var person1 = new Person()
+  Person.prototype = {
+      constructor:Person, //改变构造函数的指向
+      name:"俞菁田",
+      age:18,
+      job:"IT",
+      sayName:function(){
+        return this.name
+      }
+  }
+  var person2 = new Person()
+    console.log(person2.constructor == Object) //false
+    console.log(person2.constructor == Person)  //true
+
+    //console.log(person1.sayName())  //会报错，person1创建在原型对象修改之前
+
+
+
+
+
+</script>
+</html>
