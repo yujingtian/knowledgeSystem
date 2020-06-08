@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>extends</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //原型链继承
+    // function Parent(){
+    //     this.name = "parent"
+    //     this.list = ['parent']
+    // }
+    // Parent.prototype.sayName = function sayName(){
+    //     console.log(this.name)
+    // }
+    // function Child(){
+    //     this.name = "child"
+    // }
+    // Child.prototype = new Parent()
+    // var child = new Child()
+    // child.sayName() 
+    //构造函数继承，在子类构造函数中，call或者apply劫持父类的构造方法，并传入参数
+    // function Parent(name, id){
+    //     this.id = id
+    //     this.name = name
+    //     this.sayName = function(){
+    //         console.log(this.name)
+    //     }
+    // }
+    // Parent.prototype.sayName2 = function(){
+    //     console.log(this.name)
+    // }
+    // function Child(name, id){
+    //     Parent.call(this, name, id)
+    // }
+    // var child = new Child("yu", 1)
+    // child.sayName()
+    // child.sayName2()
+    //组合继承 综合使用构造函数继承和原型链继承
+    // function Parent(name, id){
+    //     this.name = name
+    //     this.id = id
+    //     this.list = ['a']
+    //     this.printName = function(){
+    //         console.log(this.name)
+    //     }
+    // }
+    // Parent.prototype.sayName = function (){
+    //     console.log(this.name)
+    // }
+    // function Child(name, id){
+    //     Parent.call(this, name, id)
+    // }
+    // Child.prototype = new Parent()
+    // var child = new Child('yu' , 1)
+    // console.log(child)
+    // var parent = new Parent('yuyu',2)
+    // console.log(parent)
+    // child.sayName()
+    // child.printName()
+    //原型式继承  类似Object.create，用一个函数包装一个对象，然后返回这个函数的调用，这个函数就变成了个可以随意增添属性的实例或对象，结果是将子对象的__proto__指向父对象
+    // var parent = {
+    //     names:['a']
+    // }
+    // function copy(o){
+    //     function F(){}
+    //     F.prototype = o
+    //     return new F 
+    // }
+    // var child = copy(parent)
+    // console.log(child)
+    //寄生式继承 二次封装原型式继承，并拓展
+    // var parent = {
+    //     names:['a']
+    // }
+    // function copy(o){
+    //     function F(){}
+    //     F.prototype = o
+    //     return new F 
+    // }
+    // function createObject(obj) {
+    //     var o = copy(obj);
+    //     o.getNames = function() {
+    //         console.log(this.names);
+    //         return this.names;
+    //     }
+    //     return o;
+    // }
+    // var child = createObject(parent)
+    // child.getNames()
+    //寄生组合式继承  改进组合继承，利用寄生式继承的思想继承原型
+    function copy(o){
+        function F(){}
+        F.prototype = o
+        return new F 
+    }
+    function Parent(id, name){
+        this.id = id
+        this.name = name
+        this.list = ['a']
+        this.printName = function(){
+            console.log(this.name)
+        }
+    }
+    Parent.prototype.sayName = function(){
+        console.log(this.name)
+    }
+    function Child(name, id){
+        Parent.call(this, id, name)
+    }
+    function inheirtPrototype(subClass, superClass){
+        var p = copy(superClass.prototype)  //复制一份父类的原型对象
+        p.constructor = subClass       //将构造函数指向子类
+        subClass.prototype = p      //再将整个原型对象赋值给子类的原型对象，得到新的子类对象
+    }
+    inheirtPrototype(Child, Parent)
+    var child = new Child('yu123',1)
+    console.log(child.constructor ==  Child)  //子类的构造函数指向子类对象本身
+</script>
+</html>

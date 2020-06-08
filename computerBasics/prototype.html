@@ -22,15 +22,22 @@
         return this.name
       }
   }
+  console.log(Person)
   var person2 = new Person()
     console.log(person2.constructor == Object) //false
     console.log(person2.constructor == Person)  //true
 
+console.log(person2)
     //console.log(person1.sayName())  //会报错，person1创建在原型对象修改之前
 
+console.log(Person.prototype == person2.__proto__)
+console.log(Person.prototype)
 
 
-
+// var obj = new Object()
+// var fun = new Function()
+// console.log(obj.__proto__)
+// console.log(fun.prototype.__proto__)
 
 </script>
 </html>
