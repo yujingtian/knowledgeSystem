@@ -9,6 +9,27 @@
 <body>
 </body>
 <script>
+    function Parent(name, id){
+        this.name = name
+        this.id = id
+    }
+    Parent.prototype.sayName = function(){
+        console.log(this.name)
+    }
+
+    function MyNew(){
+        var Obj = Object.create({})
+        var Constructor = [].shift.call(arguments)
+        Obj.__proto__ = Constructor.prototype
+        var result = Constructor.apply(Obj, arguments)
+        return typeof result == 'object' ? result :Obj
+    }
+    var parent = new Parent('yu',1)
+    console.log(parent)
+    var myNew = MyNew(Parent, 'yu', 1)
+    console.log(myNew)
+    
+    console.log(myNew instanceof Parent)   //true
 
 </script>
 </html>
