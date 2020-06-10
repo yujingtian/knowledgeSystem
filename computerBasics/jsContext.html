@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>js上下文</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //eval在非严格模式下，会改变外部作用域的值，此时外部作用域就是全局作用域
+    // var a = 1
+    // function test(str){
+    //     eval(str)
+    // }
+    // test('a = 3')
+    // console.log(a)
+
+    //函数提升和变量提升的优先级
+    // console.log(a)
+    
+    // var a = "我是变量"
+    // function a(){
+    //     console.log("我是函数")
+    // }
+    // console.log(a)
+    //有形参的情况
+    // function test(arg) {
+    //     // 1. 形参 arg 是 "hi" 会被覆盖
+    //     // 2. 因为函数声明比变量声明优先级高，所以此时 arg 是 function
+    //     console.log(arg);
+    //     var arg = "hello"; // 3.var arg 变量声明被忽略， arg = 'hello'被执行
+    //     function arg() {
+    //         console.log("hello world");
+    //     }
+    //     console.log(arg);
+    // }
+    // test("hi");  // f arg()       hello
+    //严格模式下
+    'use strict'
+    console.log(this) //window
+    function test(){
+        console.log(this)  //undefined
+    }
+    test()
+</script>
+</html>

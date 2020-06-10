@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>词法作用域</title>
+</head>
+<body>
+    
+</body>
+<script>
+    function scope(){
+        console.log(a)
+    }
+    function scope2(str){
+        var a =2
+        scope()
+    }
+    var a = 1
+    scope2()  // 1
+    //可以通过eval来修改词法作用域
+    function scope(){
+        console.log(a)
+    }
+    function scope2(str){
+        eval(str)
+        scope()
+    }
+    var a = 1
+    scope2('a=3')  // 3
+</script>
+</html>

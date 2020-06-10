@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>作用域和作用域链</title>
+</head>
+<body>
+    
+</body>
+<script>
+    var a=1;
+    function doSomething(){
+        var b=2;
+        function inner(){
+            console.log(b);
+        }
+        inner();
+    }
+    console.log(a); //1
+    console.log(b); //未定义  局部作用域外部访问不到
+    doSomething(); //2
+    inner() //未定义  局部作用域外部访问不到
+
+    //let 循环的妙用
+    var a = []
+    for(let i = 0; i < 10; i++ ){
+        a[i] = function(){
+            console.log(i)
+        }
+    }
+    a[6]()          //6
+    console.log(i)  //let定义 外部是无法访问到的
+</script>
+</html>
