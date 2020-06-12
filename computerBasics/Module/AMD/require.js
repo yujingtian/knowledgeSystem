@@ -9,6 +9,7 @@
 
 var requirejs, require, define;
 (function (global, setTimeout) {
+    // debugger
     var req, s, head, baseElement, dataMain, src,
         interactiveScript, currentlyAddingScript, mainScript, subPath,
         version = '2.3.6',
@@ -503,7 +504,7 @@ var requirejs, require, define;
             if (!mod) {
                 mod = registry[id] = new context.Module(depMap);
             }
-
+            console.log(registry)
             return mod;
         }
 
