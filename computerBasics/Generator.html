@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Generator</title>
+</head>
+<body>
+  
+</body>
+<script>
+
+  //yield 就是一个停顿的地方
+  function* generatorDemo() {
+    yield 'hello';
+    yield 1 + 2;
+    return 'ok';
+  }
+
+  var demo = generatorDemo()
+    console.log(demo.next())
+    console.log(demo.next())
+     console.log(demo.next())
+    // { value: "hello", done: false }
+    // { value: 3, done: false }
+     // { value: "ok", done: true }
+</script>
+</html>
