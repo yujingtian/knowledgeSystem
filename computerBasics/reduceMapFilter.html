@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>filter map reduce</title>
+</head>
+<body>
+  
+</body>
+<script>
+//第一个回调函数   第二个初始值
+var a = [1,2,3,4]  
+console.log(a.reduce(function(a, b){
+  return a - b 
+},10))
+
+//map 
+var b = [1,2,3,4]
+var c = b.map(function(item){
+  return item + 1  
+})
+console.log(b, c)
+
+ //filter 
+ var d = [1,2,3,4]
+ var e = d.filter(function(item){
+   return true
+ })
+ console.log(d, e)
+</script>
+</html>

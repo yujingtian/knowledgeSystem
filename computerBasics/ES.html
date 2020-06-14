@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Es实践</title>
+</head>
+<body>
+  
+</body>
+<script>
+//解构
+var a = [1,2,3,4]
+var [b, c, d, e] = a
+console.log(b,c,d,e)
+//Object.getOwnPropertyDescriptors()
+const obj = {
+  name: 'Jine',
+  get age() { return '18' }
+};
+console.log(Object.getOwnPropertyDescriptors(obj))   //如果obj是空就返回{}
+
+
+</script>
+</html>
