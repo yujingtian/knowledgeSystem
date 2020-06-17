@@ -9,7 +9,7 @@
 
 var requirejs, require, define;
 (function (global, setTimeout) {
-    // debugger
+    debugger
     var req, s, head, baseElement, dataMain, src,
         interactiveScript, currentlyAddingScript, mainScript, subPath,
         version = '2.3.6',
@@ -642,7 +642,8 @@ var requirejs, require, define;
             var err, usingPathFallback,
                 waitInterval = config.waitSeconds * 1000,
                 //It is possible to disable the wait interval by using waitSeconds of 0.
-                expired = waitInterval && (context.startTime + waitInterval) < new Date().getTime(),
+                // expired = waitInterval && (context.startTime + waitInterval) < new Date().getTime(),
+                expired = false,
                 noLoads = [],
                 reqCalls = [],
                 stillLoading = false,
@@ -1893,6 +1894,7 @@ var requirejs, require, define;
      * @param {Object} url the URL to the module.
      */
     req.load = function (context, moduleName, url) {
+        debugger
         var config = (context && context.config) || {},
             node;
         if (isBrowser) {

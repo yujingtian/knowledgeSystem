@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>setInterval</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //使用setTimeout实现setInterval
+     function mySetInterval(cb, time){
+         var fn = function(){
+            cb()
+            setTimeout(fn, time)
+         }
+         setTimeout(fn, time)
+     }
+     mySetInterval(function(){
+         console.log(new Date())
+     }, 1000)
+</script>
+</html>

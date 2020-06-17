@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>RegExp</title>
+</head>
+<body>
+    
+</body>
+<script>
+    //去重  \1表示（）第一个匹配到的
+    var str = "我我我我是是是是是是你你你你爹爹爹"
+    var reg = /(.)\1+/gi
+    str = str.replace(reg, "$1")
+    console.log(str)
+
+
+</script>
+</html>

@@ -35,4 +35,15 @@
       map遍历数组的每个值来做一些改变，再返回整个数组
   filter:filter返回一个数组，接受的参数是一个回调函数，filter遍历数组的每一个值，
          当数组的值在你在filter里面的规则对应为true时，返回该数组上的值，否则不返回。
-  reduce:接受两个参数，一个是回调函数，另一个是初始值                    
+  reduce:接受两个参数，一个是回调函数，另一个是初始值      
+5.setInterval需要注意的点，使用settimeout实现setInterval     (setInterval.html)
+6.JavaScript提供的正则表达式API、可以使用正则表达式（邮箱校验、URL解析、去重等）解决常见问题    RegExp.html
+  文章：http://c.biancheng.net/view/5632.html
+7.JavaScript异常处理的方式，统一的异常处理方案     
+  1.try catch
+  2.promise catch
+  3.window.onerror
+  4.window.onunhandledrejection 与 window.onerror 类似，在一个JavaScript Promise 被 reject 但是没有 catch 来捕捉这个 reject时触发。并且同时捕获到一些关于异常的信息
+  5.window.rejectionhandled
+  统一处理方案（弹框提醒）
+  toast，alert
