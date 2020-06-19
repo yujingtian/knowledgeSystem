@@ -119,4 +119,28 @@
     4.div绝对定位水平垂直居中【transforms 变形】 transform: translate(-50%,-50%); /*自己的50% */   css3 IE8及以下不支持
     5.将父盒子设置为table-cell元素，可以使用text-align:center和vertical-align:middle实现水平、垂直居中 Internet Explorer(甚至 IE8 beta)中无效，许多    嵌套标签
     6 calc计算 
-6.BFC实现原理，可以解决的问题，如何创建BFC
+6.BFC实现原理，可以解决的问题，如何创建BFC (BFC.html)
+    原理：
+        Box 是 CSS 布局的对象和基本单位， 直观点来说，就是一个页面是由很多个 Box 组成的。不同类型的 Box， 会参与不同的 Formatting Context，因此Box内的元素会以不同的方式渲染
+        Formatting context 是 W3C CSS2.1 规范中的一个概念。它是页面中的一块渲染区域，并且有一套渲染规则，它决定了其子元素将如何定位，以及和其他元素的关系和相互作用。最常见的 Formatting context 有 Block fomatting context (简称BFC)和 Inline formatting context (简称IFC)
+
+    BFC 定义
+　　    BFC(Block formatting context)直译为"块级格式化上下文"。它是一个独立的渲染区域
+    BFC的作用:
+        1.利用BFC避免margin重叠。
+        2.自适应两栏布局
+        3.清除浮动
+    BFC的生成:
+        1.根元素
+        2.float的值不为none
+        3.overflow的值不为visible
+        4.display的值为inline-block、table-cell、table-caption
+          display：table也认为可以生成BFC，其实这里的主要原因在于Table会默认生成一个匿名的table-cell，正是这个匿名的table-cell生成了BFC
+        5.position的值为absolute或fixed
+    总结:
+    BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，因为BFC内部的元素和外部的元素绝对不会互相影响，因此，
+    当BFC外部存在浮动时，它不应该影响BFC内部Box的布局，BFC会通过变窄，而不与浮动有重叠。 同样的，当BFC内部有浮动时，为了不影响外部元素的布局，BFC计算高度时会包括浮动的高度。 避免margin重叠也是这样的一个道理。 
+7.可使用CSS函数复用代码，实现特殊效果
+8、PostCSS、Sass、Less的异同，以及使用配置，至少掌握一种
+
+

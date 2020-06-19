@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>bfc</title>
+    <style>
+        .box1{
+            width:200px;
+            height:200px;
+            background:red;
+            float: left;
+        }
+        .box2{
+            width: 200px;
+            background:yellow;
+            overflow: auto;
+        }
+        .box3{
+            width:200px;
+            height:300px;
+            float: left;
+            background:black;
+        }
+    </style>
+</head>
+<body>
+    <!-- 
+        1.利用BFC避免margin重叠。
+        2.自适应两栏布局
+        3.清除浮动
+     -->
+    <div class="box1">
+
+    </div>
+    <div class="box2">
+        <div class="box3">
+
+        </div>
+    </div>
+</body>
+</html>
