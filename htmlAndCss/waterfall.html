@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>瀑布流布局</title>
+  <style>
+    *{
+      margin:0;
+      padding:0;
+    }
+    body,html{
+      height:100%;
+      width:100%;
+    }
+    #waterFull{
+      width:100%;
+    }
+    .waterFullItem{
+      position: absolute;
+    }
+  </style>
+</head>
+<body>
+  <div id="waterFull">
+  </div>
+</body>
+<script>
+  var waterFullItemWidth = 300;
+  var col = Math.floor(document.body.clientWidth / waterFullItemWidth)
+  var arr = []
+  function insert(){
+    var waterFull = document.getElementById("waterFull")
+    var waterFullItem = document.createElement("div")
+    waterFullItem.setAttribute("class","waterFullItem")
+    var height = Math.ceil(Math.random() * 5) * 100
+    waterFullItem.style.height = height + "px"
+    var positionInfo = getMinHeightItem(height)
+    console.log(positionInfo)
+    waterFullItem.style.width = waterFullItemWidth + "px"
+    waterFullItem.style.top = positionInfo.top + "px"
+    waterFullItem.style.left = positionInfo.left + "px"
+    waterFullItem.style.background = "rgba("+ colorRandom()+", " + colorRandom() +", " + colorRandom() +")"
+    waterFull.appendChild(waterFullItem)
+  }
+  function colorRandom(){
+    return Math.random() * 255 
+  }
+  function getMinHeightItem(height){
+    if(arr.length < col){
+      arr.push(height)
+      return {
+        left: (arr.length - 1) * waterFullItemWidth,
+        top:0
+      }
+    }
+    else{
+      var currentIndex = 0, currentHeight = arr[0]
+      arr.forEach(function(item, index){
+        if(item < currentHeight){
+          currentHeight = item
+          currentIndex = index
+        }
+      })
+      arr[currentIndex] = Number(arr[currentIndex]) + Number(height)
+      console.log(arr)
+      return{
+        top: currentHeight,
+        left : waterFullItemWidth * currentIndex
+      }
+    }
+  }
+  for(var i = 0; i <100; i++){
+    insert()
+  }
+</script>
+</html>

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>几何</title>
+  <style>
+  .pie{
+      width:140px;
+      height: 140px;
+      background: #8BC34A;
+      border-radius: 50%;
+      background-image: linear-gradient(to right,transparent 50%,#655 0);
+  }
+  .pie::before{
+      content: '';
+      display: block;
+      margin-left: 50%;
+      height: 100%;
+      border-top-left-radius:0;
+      border-top-right-radius:100% 50%;
+      border-bottom-right-radius:100%  50%;
+      border-bottom-left-radius:0;
+      background-color: inherit;
+      transform-origin: left;
+      transform: rotate(.1turn);
+  }
+  .example2{
+    background: #8BC34A;
+    background: linear-gradient(135deg, transparent 15px, #8BC34A 0) top left,
+                linear-gradient(-135deg, transparent 15px, #8BC34A 0) top right,
+                linear-gradient(-45deg, transparent 15px, #8BC34A 0) bottom right,
+                linear-gradient(45deg, transparent 15px, #8BC34A 0) bottom left;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    
+    padding: 1em 1.2em;
+    max-width: 12em;
+    line-height: 1.5em;
+}
+.example3{
+    background: #8BC34A;
+    background: radial-gradient(circle at top left, transparent 25px, #8BC34A 0) top left,
+                radial-gradient(circle at top right, transparent 25px, #8BC34A 0) top right,
+                radial-gradient(circle at bottom right, transparent 25px, #8BC34A 0) bottom right,
+                radial-gradient(circle at bottom left, transparent 25px, #8BC34A 0) bottom left;
+    background-size: 50% 50%;
+    background-repeat: no-repeat;
+    padding: 1em 1.2em;
+    max-width: 12em;
+}
+  </style>
+</head>
+<body>
+  <div class="pie"></div>
+  <div class="example2">Hey, focus! You’re supposed to be looking at my corners, not reading my text. The text is just
+    placeholder!</div>
+  
+    <div class="example3">Hey, focus! You’re supposed to be looking at my corners, not reading my text. The text is just
+      placeholder!</div>
+    
+</body>
+</html>
