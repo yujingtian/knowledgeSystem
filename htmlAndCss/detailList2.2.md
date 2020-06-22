@@ -140,7 +140,35 @@
     总结:
     BFC就是页面上的一个隔离的独立容器，容器里面的子元素不会影响到外面的元素，因为BFC内部的元素和外部的元素绝对不会互相影响，因此，
     当BFC外部存在浮动时，它不应该影响BFC内部Box的布局，BFC会通过变窄，而不与浮动有重叠。 同样的，当BFC内部有浮动时，为了不影响外部元素的布局，BFC计算高度时会包括浮动的高度。 避免margin重叠也是这样的一个道理。 
-7.可使用CSS函数复用代码，实现特殊效果
-8、PostCSS、Sass、Less的异同，以及使用配置，至少掌握一种
+7.可使用CSS函数复用代码，实现特殊效果  文章：https://www.w3cplus.com/css/css-functions.html
+    calc() 计算函数
+    attr() 
+    counter()
+    max()
+    min()
+    toggle() 老版本用cycle()
+8、PostCSS、Sass、Less的异同，以及使用配置，至少掌握一种 文章：https://blog.csdn.net/JoeBlackzqq/article/details/98885880
+    Sass、Less都是css预处理器
+    变量符：Less是@，而Scss是$  Stylus样式中声明变量没有任何限定，你可以使用“$”符号开始
+    输出设置：Less没有输出设置，Sass提供4中输出选项：nested, compact, compressed 和 expanded
+    处理条件语句：Sass支持条件语句，可以使用if{}else{},for{}循环等等。 LESS的条件语句使用有些另类，他不是我们常见的关键词if和else if之类，而其实现方式              是利用关键词“when”
+    编译Sass要安装Ruby
+    PostCSS 是目前流行的一个对 CSS 进行处理的工具（平台）。PostCSS 依托其强大的插件体系为 CSS 处理增加了无穷的可能性。
+            PostCSS 一般不单独使用，而是与已有的构建工具进行集成
+            优点1.扩展性强 2.兼容性强 3.功能全面 4.有很多插件库供选择
+            缺点1.配置繁琐 2.学习相对陡峭
+9.CSS模块化方案、如何配置按需加载、如何防止CSS阻塞渲染
+   css模块化：命名约定:
+                BEM:三个组成部分的英文首字母，分别是块（Block）、元素（Element）和修饰符（Modifier）。这三个不同的组成部分称为 BEM 实体
+                    1.EM 实体名称全部是小写字母或数字。名称中的不同单词用单个连字符（-）分隔
+                    2.BEM 元素名称和块名称之间通过两个下划线（__）分隔
+                    3.布尔修饰符和其所修饰的实体名称之间通过两个连字符（–）来分隔。不使用名值对修饰符
+                OOCSS:结构和样式分开  容器和内容分开 增强css的复用性
+                AMCSS: css属性选择器来模块化CSS
+                SMACSS: 可扩展和模块化的css架构
+            CSS in JS:styled-components
+            使用JS 来管理样式模块:CSS Modules   CSS scoped
+
+   
 
 

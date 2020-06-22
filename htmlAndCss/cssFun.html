@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+<meta charset="utf-8" />
+<title>attr()函数_CSS参考手册_web前端开发参考手册系列</title>
+<style>
+    div:after{content:attr(title);}
+    div:before{content:attr(toop);}
+    
+    dl { counter-reset:test1 0;}
+    dt { counter-increment: test1; counter-reset: test2 0;}
+    dt:before{ content:counter(test1)"、";}
+    dd{ counter-increment:test2;}
+    dd:before{
+     content:counter(test1)"-"counter(test2)"、";
+    }
+</style>
+</head>
+<body>
+    <div toop="123" title="在支持content属性的浏览器中能看到我被显示了"></div>
+
+    <dl>
+        <dt>example</dt>
+        <dd>example</dd>
+        <dd>example</dd>
+        <dd>example</dd>
+        <dt>example2</dt>
+        <dd>example2</dd>
+        <dd>example2</dd>
+        <dd>example2</dd>
+        <dd>example2</dd>
+    </dl>
+</body>
+</html>
+	
