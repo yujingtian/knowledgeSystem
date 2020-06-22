@@ -158,7 +158,7 @@
             优点1.扩展性强 2.兼容性强 3.功能全面 4.有很多插件库供选择
             缺点1.配置繁琐 2.学习相对陡峭
 9.CSS模块化方案、如何配置按需加载、如何防止CSS阻塞渲染
-   css模块化：命名约定:
+   css模块化：1.命名约定:
                 BEM:三个组成部分的英文首字母，分别是块（Block）、元素（Element）和修饰符（Modifier）。这三个不同的组成部分称为 BEM 实体
                     1.EM 实体名称全部是小写字母或数字。名称中的不同单词用单个连字符（-）分隔
                     2.BEM 元素名称和块名称之间通过两个下划线（__）分隔
@@ -166,8 +166,23 @@
                 OOCSS:结构和样式分开  容器和内容分开 增强css的复用性
                 AMCSS: css属性选择器来模块化CSS
                 SMACSS: 可扩展和模块化的css架构
-            CSS in JS:styled-components
-            使用JS 来管理样式模块:CSS Modules   CSS scoped
+            2.CSS in JS:styled-components
+            3.使用JS 来管理样式模块:CSS Modules   CSS scoped
+    防止CSS阻塞渲染:文章https://www.jianshu.com/p/2f358123038e  降低加载css的优先级
+10.熟练使用CSS实现常见动画，如渐变、移动、旋转、缩放等等  transition   animation
+11.CSS浏览器兼容性写法，了解不同API在不同浏览器下的兼容性情况
+    -webkit- ，针对safari，chrome浏览器的内核CSS写法
+    -moz-，针对firefox浏览器的内核CSS写法
+    -ms-，针对ie内核的CSS写法
+    -o-，针对Opera内核的CSS写法
+    兼容性情况：
+        https://cloud.tencent.com/developer/news/323781
+        https://blog.csdn.net/Wz1135640/article/details/78192648
+12.掌握一套完整的响应式布局方案
+    1. 媒体查询  @media 判断屏幕
+    2.百分比布局  bootstrap的栅格化
+    3.rem布局
+    文章：https://blog.csdn.net/sinat_17775997/article/details/89087348
 
    
 

@@ -5,8 +5,124 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>吸顶</title>
+  <style>
+    *{
+      padding:0;
+      margin:0; 
+    }
+  #xitamade{
+    position: relative;
+    /* margin-top:100px; */
+    box-sizing: border-box;
+  }
+  .box{
+    height:30px;
+    background:red;
+    text-align: center;
+    line-height:30px;
+    width:100%;
+  }
+  .content{
+    height:1000px;
+  }
+  </style>
 </head>
 <body>
-  
+  <div id="xitamade">
+      <div class="box" style="position: fixed">我想被吸0</div>
+      <div class="content">
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+      </div>
+      <div class="box">我想被吸1</div>
+      <div class="content">
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+      </div>
+      <div class="box">我想被吸2</div>
+      <div class="content">
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+      </div>
+      <div class="box">我想被吸3</div>
+      <div class="content">
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+          12312321<br/>
+      </div>
+  </div>
 </body>
+<script>
+  var fixTop = document.getElementById("xitamade")
+  var box = document.getElementsByClassName("box")
+  var current = 0
+  var oldScrollTop = 0
+  var boxRecord = []
+  for(var i = 0; i < box.length; i++){
+    boxRecord.push(box[i].offsetTop)
+  }
+  document.onscroll = function(e){
+    // console.log(e.target.documentElement.scrollTop)
+    if(current == 0 && e.target.documentElement.scrollTop < 5){
+        box[current].setAttribute("style","position:fixed;top:0")
+    }
+    else if(oldScrollTop > e.target.documentElement.scrollTop){
+      // console.log("向上",e.target.documentElement.scrollTop,current, box[current].offsetTop)
+      if(e.target.documentElement.scrollTop < boxRecord[current]){
+        box[current].setAttribute("style","position:relative")
+        current--
+      }
+      if(e.target.documentElement.scrollTop >= box[current + 1].offsetTop - 30 && e.target.documentElement.scrollTop < box[current + 1].offsetTop){
+            console.log("有两个重叠了")
+            box[current].style.top = (-(e.target.documentElement.scrollTop - box[current + 1].offsetTop + box[current + 1].clientHeight)) + "px"
+      }
+    }else{
+      if(e.target.documentElement.scrollTop > box[current].offsetTop){
+        if(current < boxRecord.length - 1){
+          if(e.target.documentElement.scrollTop >= box[current + 1].offsetTop - 30 && e.target.documentElement.scrollTop < box[current + 1].offsetTop){
+            console.log("有两个重叠了")
+            box[current].style.top = (-(e.target.documentElement.scrollTop - box[current + 1].offsetTop + box[current + 1].clientHeight)) + "px"
+          }
+          else if(e.target.documentElement.scrollTop >= box[current + 1].offsetTop){
+            box[current].setAttribute("style","position:relative")
+            box[current+1].setAttribute("style","position:fixed;top:0")
+            current++
+          }  
+        }
+      }
+    }
+    oldScrollTop = e.target.documentElement.scrollTop
+  }
+</script>
 </html>
