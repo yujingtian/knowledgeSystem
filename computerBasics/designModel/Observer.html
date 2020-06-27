@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>观察者模式</title>
+</head>
+<body>
+  
+</body>
+<script>
+function Publish(name){
+  this.name = name
+  this.subscribe = []
+}
+Publish.prototype.deliver = function(news){
+  var publish = this
+  this.subscribe.forEach(function(item){
+    item.reserveMsg(news, publish)
+  })
+  return this
+}
+
+function Observer(name){
+  this.name = name
+}
+Observer.prototype.reserveMsg = function(news, publish){
+  console.log(this.name,"收到了",publish.name,"的通知：", news)
+}
+Observer.prototype.subscribe = function(publish){
+  var sub = this
+  var areadyExists = publish.subscribe.some(function(item){
+      return item === sub
+  })
+  if(!areadyExists){
+    publish.subscribe.push(sub)
+  }
+  return this
+}
+Observer.prototype.unsubscribe = function(publish){
+    var sub = this
+    publish.subscribe = publish.subscribe.filter(function(item){
+      return item != sub
+    })
+    return this
+}
+
+var publish = new Publish("中央报社")
+var observer1 = new Observer("lili")
+var observer2 = new Observer("mingming")
+observer1.subscribe(publish)
+observer2.subscribe(publish).unsubscribe(publish)
+publish.deliver("今天休息一天")
+</script>
+</html>

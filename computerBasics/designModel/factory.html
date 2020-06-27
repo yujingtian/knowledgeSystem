@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>工厂模式</title>
+</head>
+<body>
+
+</body>
+<script>
+function car(name){
+  this.name = name
+}
+function Factory(name){
+  return new car(name)
+}
+
+var a = new Factory("奥迪")
+var b = new Factory("别克")
+console.log(a,b)
+</script>
+</html>

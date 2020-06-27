@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>发布订阅模式</title>
+</head>
+<body>
+  
+</body>
+<script>
+  var pubsub = {
+    list:{},
+    subscribe:function(key, fn){
+      if(!this.list[key]){
+        this.list[key] = []
+      }
+      this.list[key].push(fn)
+    },
+    unsubscribe:function(key, fn){
+      var fnList = this.list[key]
+      if(!fnList) return false
+      if(!fn){
+        fnList && (fnList.length = 0)
+      }else{
+        fnList.forEach(function(item, index){
+          item === fn && fnList.splice(index, 1)
+        });
+      }
+    },
+    publish:function(key,arg){
+      for(var fn of this.list[key])
+      {
+        fn.call(this, arg)
+      }
+    }
+  }
+  //订阅者将事件注册到调度中心
+  pubsub.subscribe("test1",function(){
+    console.log("test1")
+  })
+  //发布者发布事件到调度中心
+  pubsub.publish("test1")
+</script>
+</html>
