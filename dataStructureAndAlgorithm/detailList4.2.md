@@ -1,5 +1,5 @@
 4.2手动实现前端轮子
-1.手动实现call、apply、bind
+1.手动实现call、apply、bind (thisPoint.html)
 2.手动实现符合Promise/A+规范的Promise、手动实现async await
 3.手写一个EventEmitter实现事件发布、订阅
 4.可以说出两种实现双向绑定的方案、可以手动实现

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>柯里化</title>
+</head>
+<body>
+    
+</body>
+<script>
+function curry(){
+    var _arg = Array.prototype.slice.call(arguments)
+    var _curry = function(){
+        _arg = _arg.concat(Array.prototype.slice.call(arguments))
+        return _curry
+    }
+
+    _curry.toString = function(){
+        var total = _arg.reduce(function(total, num){
+            return total + num
+        })
+        return total
+    }
+    return _curry
+}
+curry(1)(2)(3,4)
+</script>
+</html>
