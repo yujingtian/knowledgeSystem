@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>MVVM</title>
+</head>
+<body>
+<input v-value="str" type="text" id="input">
+<input v-value="str2" type="text" id="input2">
+<div v-text="str" id="text"></div>    
+<button type="button" id="button">修改值</button>
+</body>
+<script>
+    var data = {
+        str:"这是双向绑定",
+        str2:"str2"
+    }
+
+    var input = document.getElementById("input")
+    var input2 = document.getElementById("input2")
+    var text = document.getElementById("text")
+    var button = document.getElementById("button")
+    console.log(input.attributes)
+    var eleArr = [input, text, input2]
+    button.onclick = (function(){
+        data.str = "我是大帅哥"
+        data.str2 = "我是大帅哥2"
+        updateView("str")
+        updateView("str2")
+    })
+
+    function updateView(key){
+        eleArr.forEach(function(elem){
+            for(var attr in elem.attributes){
+                if(elem.attributes[attr].nodeName == "v-value" && key === elem.attributes[attr].nodeValue){
+                    elem.value = data[key]
+                }
+                else if(elem.attributes[attr].nodeName == "v-text" && key === elem.attributes[attr].nodeValue){
+                    elem.innerText = data[key]
+                }
+            }
+        })
+    }
+    input.addEventListener("input",function(e){
+        data.str = e.target.value
+        updateView("str")
+    })
+
+    for(var i in data){
+        updateView(i)
+    }
+</script>
+</html>

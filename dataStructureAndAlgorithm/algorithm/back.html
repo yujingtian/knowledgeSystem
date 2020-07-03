@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>back</title>
+</head>
+<body>
+    
+</body>
+<script>
+var n = 8;//总行（列）数  8*8
+var iCount = 0;//n皇后的解法数
+var arr = [];
+//arr是长度为n*n的一维数组，保存着n*n个对象（li）并有各自的坐标，默认index都为-1，表示没有被任何皇后标记过  arr[ i*n + j ].y = i; arr[ i*n + j ].x = j;
+for(var i=0;i<n;i++){
+  for(var j=0;j<n;j++){
+    arr[ i*n + j ] = {}
+    arr[ i*n + j ].x = j;
+    arr[ i*n + j ].y = i;
+    arr[ i*n + j ].index = -1
+    //arr[ i*n + j ].innerHTML = j + ',' + i;
+  }
+}
+console.log(JSON.parse(JSON.stringify(arr)))
+//iQueen从0开始，即皇后0
+function setQueen(iQueen){
+  
+  if( iQueen == n ){
+    iCount++;
+    console.log(iCount)
+    return;
+  }
+  
+  for(var i=0;i<n;i++){
+    
+    if( arr[ iQueen*n + i ].index == -1 ){
+      arr[ iQueen*n + i ].index = iQueen;
+      //arr[ iQueen*n + i ].innerHTML = iQueen;
+      var x = arr[ iQueen*n + i ].x;
+      var y = arr[ iQueen*n + i ].y;
+      
+      for(var j=0;j<arr.length;j++){
+        if( arr[j].index == -1 && (arr[j].x == x || arr[j].y == y || arr[j].x - arr[j].y == x - y || arr[j].x + arr[j].y == x + y)  ){
+          arr[j].index = iQueen;
+          //arr[j].innerHTML = iQueen;
+        }
+      }
+      setQueen( iQueen + 1 );
+      //回溯
+      for(var j=0;j<arr.length;j++){
+        if( arr[j].index == iQueen ){
+          arr[j].index = -1;
+          //arr[j].innerHTML = -1;
+        }
+      }
+    
+    }
+  }
+}
+setQueen(0)
+</script>
+</html>

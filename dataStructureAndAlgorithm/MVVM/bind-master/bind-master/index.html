@@ -1,0 +1,38 @@
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <style>
+      #app {
+        margin: 20px auto;
+        width: 800px;
+        padding: 200px;
+        text-align: center;
+        border: 2px solid #ccc;
+      }
+    </style>
+  </head>
+  <body>
+        <div id="app">
+          <input class="form-control" v-model="name" type="text">
+          <h1>{{name}}</h1>
+          <h1>{{age}}</h1>
+        </div>
+  </body>
+  <script src="./Observer.js"></script>
+  <script src="./watcher.js"></script>
+  <script src="./compile.js"></script>
+  <script src="./index.js"></script>
+  <script>
+    console.log(document.body.firstChild)
+    const vm = new Mvue({
+      el: "#app",
+      data: {
+        name: "我是摩登",
+        age:28
+      }
+    }); 
+    vm.name = 123
+    vm.age = 18
+  </script>
+</html>

@@ -9,4 +9,51 @@
 <body>
     
 </body>
+<script>
+const getData = function(){
+    return new Promise(function(resolve){
+        console.log(123)
+        setTimeout(function(){
+            resolve("data")
+        }, 1000)
+    })
+}
+function* testG(){
+    console.log("start")
+    const data = yield 123
+    console.log('data: ', data);
+    const data2 = yield 123
+    console.log('data2: ', data);
+    const data3 = yield getData()
+    console.log('data3: ', data2);
+    return 'success'
+}
+
+function asyncToGenerator(generator){
+    return function(){
+         var gen = generator.apply(this, arguments)
+         return new Promise(function(resolve, reject){
+            function step(key, arg){
+                var info
+                try{
+                    info = gen[key](arg) 
+                }catch(err){
+                    return reject(err)
+                }
+                var value = info.value
+                var done = info.done
+                if(done){
+                    return resolve(value)
+                }else{
+                    return Promise.resolve(value).then(val => step('throw', val), err => step('throw', err))
+                }
+            }
+            step("next")
+         }).catch(function(err){
+             console.log("错误",err)
+         })
+    }
+}
+asyncToGenerator(testG)()
+</script>
 </html>

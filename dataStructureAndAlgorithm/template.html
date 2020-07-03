@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>template</title>
+</head>
+<body>
+    <div id="app">
+        <div>123<div>{{name}}</div>123
+        </div>
+        <div>
+            
+            <div><div><div>{{age}}</div></div></div>
+            </div>
+        <div>{{gender}}</div>
+        <div>{{height}}</div>
+    </div>
+</body>
+<script>
+    var data = {
+        name:"yjt",
+        age:18,
+        gender:"man",
+        height:"178"
+    }
+    var app = document.getElementById("app")
+    
+    
+    function createFragment(app){
+        var fragment = document.createDocumentFragment()
+        var child = app.firstChild
+        while(child){
+            fragment.appendChild(child)
+            child = app.firstChild
+        }
+        return fragment
+    }
+    var fragment = createFragment(app)
+    var reg = /\{\{(.*)\}\}/
+    function compile(fragment){
+        var childNodes = fragment.childNodes
+        childNodes.forEach(node => {
+            if(isNode(node)){
+                compile(node)
+            }else{
+                if(reg.test(node.textContent)){
+                    var name = reg.exec(node.textContent)[1]
+                    node.textContent = node.textContent.replace(reg.exec(node.textContent)[0], data[name])
+                }
+            }
+        }); 
+        return fragment
+    }
+    function isNode(node){
+        return node.nodeType === 1 ? true:false
+    }
+    app.appendChild(compile(fragment)) 
+</script>
+</html>

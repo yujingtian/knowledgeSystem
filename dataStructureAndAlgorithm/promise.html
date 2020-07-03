@@ -10,6 +10,96 @@
     
 </body>
 <script>
+id = 0
+function Mypromise(execute){
+    let self = this
+    this.successFunArr = []
+    this.errorFunArr = []
+    this.value = undefined
+    this.reason = undefined
+    this.status = "pending"
+    this.id = id++
 
+    function resolve(value){
+        if(self.status == "pending"){
+            self.status = "resolve"
+            self.value = value
+            console.log(self.successFunArr)
+            self.successFunArr.forEach(fun => fun())
+        }
+    }
+    function reject(reason){
+        if(self.status == "pending"){
+            self.status = "reject"
+            self.reason = reason
+            self.errorFunArr.forEach(fun => fun())
+        }
+    }
+    execute(resolve, reject)
+}
+
+Mypromise.prototype.then = function(onFulfilled, onRejected){
+    let self = this
+    let promise
+    if(self.status == "resolve"){
+        promise = new Mypromise(function(resolve, reject){
+            onFulfilled(self.value)
+        })
+    }
+    if(self.status == "reject"){
+        promise = new Mypromise(function(resolve, reject){
+            onRejected(self.reason)
+        })
+    }
+    if(self.status == "pending"){
+        promise = new Mypromise(function(resolve, reject){
+            self.successFunArr.push(function(){
+                setTimeout(function(){
+                    let x = onFulfilled(self.value)
+                    handleThen(x, resolve, reject)
+                },0)
+            })
+            self.errorFunArr.push(function(){
+                setTimeout(function(){
+                    let x = onRejected(self.reason)
+                    handleThen(x, resolve, reject)
+                },0)
+            })
+        })
+    }
+    return promise
+}
+
+function handleThen(x, resolve, reject){
+    if(x != null && (typeof x == "function" || typeof x == "object")){
+        let then = x.then
+        if(typeof then == 'function'){
+            then.call( x , function(y){
+                handleThen(y, resolve, reject)
+            }, function(){
+                reject()
+            })
+        } else {
+            resolve(x)
+        }
+    }else {
+        resolve(x)
+    }
+}
+
+
+new Mypromise(function(resolve, reject){
+    setTimeout(function(){
+        console.log(22)
+        resolve(10)
+    },2000)
+}).then(function(res){
+    setTimeout(function(){
+        console.log(123)
+    },1000)
+    return 333
+}).then(function(res){
+    console.log(res)
+})
 </script>
 </html>

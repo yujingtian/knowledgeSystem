@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>贪心算法</title>
+</head>
+<body>
+    
+</body>
+<script>
+function greedy(values, weights, capacity){
+  var returnValue = 0
+  var remainCapacity = capacity
+  var sortArray = []
+  values.map((cur, index) =>{
+    sortArray.push({
+      'value': values[index],
+      'weight': weights[index],
+      'ratio': values[index]/weights[index]
+    })
+  })
+  sortArray.sort(function(a, b){
+    return b.ratio - a.ratio
+  })
+  sortArray.map((cur,index) => {
+    var num = parseInt(remainCapacity/cur.weight)
+    console.log(num)
+    remainCapacity -= num*cur.weight
+    returnValue += num*cur.value
+  })
+  return returnValue
+}
+var items = ['A','B','C','D']
+var values = [50,220,60,60]
+var weights = [5,20,10,12]
+var capacity = 32 //背包容积
+console.log(greedy(values, weights, capacity))
+</script>
+</html>
