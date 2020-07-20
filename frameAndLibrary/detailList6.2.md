@@ -1,6 +1,19 @@
 6.2Vue
 1.熟练使用Vue的API、生命周期、钩子函数
+    beforeCreate
+    created
+    beforeMount
+    mounted
+    updated
+    activated
+    deactivated
+    beforeDestroy
+    destroyed
+    errorCaptured
 2.MVVM框架设计理念
+    数据和视图完全分离
+    数据驱动，摆脱了dom操作
+    独立开发，开发人员可以专注于业务逻辑和数据的开发
 3.Vue双向绑定实现原理、Diff算法的内部实现
 4.Vue的事件机制
 5.从template转换成真实DOM的实现机制
