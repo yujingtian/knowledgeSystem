@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>history</title>
+</head>
+<body>
+    <button type="button" id="go" onclick="history.go(1)">go</button>
+    <button type="button" id="back" onclick="history.back()">back</button>
+</body>
+<script>
+    window.onpopstate = function(e){
+        console.log(e)
+    }
+    history.pushState({page: 1}, "title 1", "?page=1")
+    history.pushState({page: 2}, "title 2", "?page=2");
+    history.replaceState({page: 3}, "title 3", "?page=3");
+    console.log(history)
+</script>
+</html>
